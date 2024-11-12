@@ -34,7 +34,7 @@ export async function getAllByUsername(username){
     return tweets.filter((tweet)=> tweet.username == username)
 }
 
-//글 번호에 의해서 리턴
+
 export async function getById(id){
     return tweets.find((tweet)=> tweet.id == id)
 }
