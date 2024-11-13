@@ -1,12 +1,17 @@
 import * as authRepository from '../data/auth.js'
 import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+
 const secretKey = 'abcdefg1234%^&*'
 const bcryptSaltRounds = 10
 const jwtExpiresInDays = '2d'
+
+
 async function createJwtToken(id){
     return jwt.sign({id}, secretKey, {expiresIn: jwtExpiresInDays})
 }
+
+
 export async function signup(req, res, next){
     const { username, password, name, email } = req.body
     // 회원 중복 체크
@@ -22,21 +27,21 @@ export async function signup(req, res, next){
     res.status(201).json({token, username})
 }
 
-
 export async function login(req, res, next){
     const {username, password} = req.body
     const user = await authRepository.findByUsername(username)
     if(!user){
         return res.status(401).json(`${username} 아이디를 찾을 수 없음`)
     }
+
     const isValidPassword = await bcrypt.compare(password, user.password)
     if (!isValidPassword){
         return res.status(401).json({message: `아이디 또는 비밀번호 확인`})
     }
-    const token =  await createJwtToken(user.id)
+    
+    const token = await createJwtToken(user.id)
     res.status(200).json({ token, username })
 }
-
 
 export async function verify(req, res, next){
     const token = req.header['Token']
@@ -45,13 +50,10 @@ export async function verify(req, res, next){
     }
 }
 
-
-export async function me(req,res,next){
+export async function me(req, res, next){
     const user = await authRepository.findById(req.userId)
     if(!user){
-        return res.status(404).json({message:'일치하는 사용자가없음'})
+        return res.status(404).json({message: '일치하는 사용자가 없음'})
     }
-    
-    res.status(200).json({token:req.token, username:user.username})
-
+    res.status(200).json({token: req.token, username: user.username})
 }

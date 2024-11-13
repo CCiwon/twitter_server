@@ -2,7 +2,7 @@ let users = [
     {
         id:'1',
         username:'apple',
-        password:'$2b$10$5thDiOMQwjA6Qn3l6Nt.JeEt7AM44niswsDHyBBzImdh.SGNEGjbq',
+        password:'$2b$10$pgJ/lpeHhtG9cYGGgKq.U.9.iZ/hX1j.kgVp/qTpDembvr.0XhNKK',
         name:'김사과',
         email:'apple@apple.com',
         url:'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-woman-s-face-with-long-brown-eyes-image_2888808.jpg'
@@ -10,7 +10,7 @@ let users = [
     {
         id:'2',
         username:'banana',
-        password:'$2b$10$R5f.Gx0AEJaGNdAf.0ap6.MO0BNQtqsaSp4atECdze8FphVzGXUPq',
+        password:'$2b$10$klvYHmNBMvLJQbiRbYFCt.mj2li27XjsToNP9gHl.fYPDFOu.DTQK',
         name:'반하나',
         email:'banana@banana.com',
         url:'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-woman-s-face-with-long-brown-eyes-image_2888808.jpg'
@@ -18,7 +18,7 @@ let users = [
     {
         id:'3',
         username:'orange',
-        password:'$2b$10$bwtZ/5zvcm3Bvp/0lgW8cuLSv.X1eoqShK/jydNIUCfgyRMzmU9ly',
+        password:'$2b$10$XHe2BZnunhm.53Dwwvx8.e7rtgrbu4viFE55uKLdpNYcgDXqDnUM2',
         name:'오렌지',
         email:'orange@orange.com',
         url:'https://png.pngtree.com/thumb_back/fh260/background/20230611/pngtree-woman-s-face-with-long-brown-eyes-image_2888808.jpg'
@@ -44,5 +44,5 @@ export async function findByUsername(username){
 }
 
 export async function findById(id){
-    return users.find((user)=> user.id== id)
+    return users.find((user) => user.id === id)
 }
