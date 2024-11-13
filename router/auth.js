@@ -2,6 +2,8 @@ import express from 'express'
 import * as authController from '../controller/auth.js'
 import { body } from 'express-validator'
 import { validate } from '../middleware/validator.js'
+import { isAuth } from '../middleware/auth.js'
+
 
 const router = express.Router()
 const validateTweet = [
@@ -15,7 +17,7 @@ router.post('/signup', validateTweet,authController.signup)
 
 router.post('/login', authController.login)
 
-router.post('/me', authController.verify)
+router.post('/me', authController.me) //로그인 판별
 
 // 로그인 유지
 
