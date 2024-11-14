@@ -9,7 +9,7 @@ const jwtExpiresInDays = '2d'
 
 
 async function createJwtToken(id){
-    return jwt.sign({id},config.jwt.secretKey, {expiresIn: config.jwt.expiresInDays})
+    return jwt.sign({id},config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec})
 }
 
 
