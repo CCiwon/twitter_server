@@ -20,6 +20,16 @@ export const config = {  //외부에서 갖다 쓸수있게 해줌
     },
     host:{
         port:parseInt(required('HOST_PORT',8080))
+    },
+    db:{
+        host: required('DB_HOST'),
+        user: required('DB_USER'),
+        password: required('DB_PASSWORD'),
+        database: required('DB_DATABASE'),
+        port: required('DB_PORT')
+
     }
 
 } //한번 코드 흐름을 다시 볼 필요가있음
+
+// npm i mysql2

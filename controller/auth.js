@@ -14,7 +14,7 @@ async function createJwtToken(id){
 
 
 export async function signup(req, res, next){
-    const { username, password, name, email } = req.body
+    const { username, password, name, email, url } = req.body
     // 회원 중복 체크
     const found = await authRepository.findByUsername(username)
     if(found){
@@ -22,7 +22,13 @@ export async function signup(req, res, next){
     }
     // const users = await authRepository.createUser(username, password, name, email)
     const hashed = bcrypt.hashSync(password, config.bcrypt.saltRounds)
-    const users = await authRepository.createUser(username, hashed, name, email)
+    const users = await authRepository.createUser({//{} 로 감싸야지 한번에 보낼수 있음
+        username, 
+        password:hashed, 
+        name, 
+        email,
+        url
+    }) 
     const token = await createJwtToken(users.id)
     // console.log(token)
     res.status(201).json({token, username})
