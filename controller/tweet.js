@@ -12,6 +12,7 @@ export async function getTweets(req, res, next){
 export async function getTweet(req, res, next){
     const id = req.params.id
     const tweet = await tweetRepository.getById(id)
+    console.log(tweet)
     if(tweet){
         res.status(200).json(tweet)
     }else{

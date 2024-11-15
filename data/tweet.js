@@ -1,7 +1,7 @@
 import { Result } from "express-validator"
 import { db } from "../db/database.js"
 
-const SELECT_JOIN = 'SELECT u.id, u.username, u.name, u.url, tw.text, tw.createdAt, tw.userId FROM users as u JOIN tweets as tw ON u.id = tw.userId'
+const SELECT_JOIN = 'SELECT tw.id, u.username, u.name, u.url, tw.userId, tw.text, tw.createdAt FROM users as u JOIN tweets as tw  ON u.id = tw.userId'
 
 const ORDER = 'ORDER BY tw.createdAt DESC'
 
@@ -12,13 +12,13 @@ export async function getAll() {
 
 // 아이디에 대한 트윗을 리턴
 export async function getAllByUsername(username) {
-    return db.execute(`${SELECT_JOIN} WHERE u.username = ? ${ORDER}`, [username])
-        .then((result) => result[0])
+    return db.execute(`${SELECT_JOIN} WHERE u.username=? ${ORDER}`, [username]).then((result) => result[0])
 }
 
 // 글 번호에 대한 트윗을 리턴
 export async function getById(id) {
-    return db.execute(`${SELECT_JOIN} WHERE tw.id = ?`, [id]).then((result) => result[0][0])
+    return db.execute(`${SELECT_JOIN} WHERE tw.id=?`, [id])
+        .then((result) => result[0][0])
 }
 
 // 트윗을 작성
