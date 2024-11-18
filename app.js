@@ -3,10 +3,17 @@ import tweetsRouter from './router/tweets.js'
 import authRouter from './router/auth.js'
 import { config } from './config.js'
 import { initSocket } from './connection/ socket.js' //사용자가 들어오면 소켓을 나눠줌
-import { db } from "./db/database.js"
+//import { db } from "./db/database.js"
+import cors from 'cors'
 
-
+//npm i cors
 const app = express()
+
+//미들웨어
+app.use(cors({
+    origin: '*',
+    credentials:true
+}))
 
 app.use(express.json())
 
