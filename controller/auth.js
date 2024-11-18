@@ -3,13 +3,9 @@ import * as bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
 import { config } from '../config.js'
 
-const secretKey = 'abcdefg1234%^&*'
-const bcryptSaltRounds = 10
-const jwtExpiresInDays = '2d'
-
 
 async function createJwtToken(id){
-    return jwt.sign({id},config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec})
+    return jwt.sign({id}, config.jwt.secretKey, {expiresIn: config.jwt.expiresInSec})
 }
 
 
@@ -22,13 +18,12 @@ export async function signup(req, res, next){
     }
     // const users = await authRepository.createUser(username, password, name, email)
     const hashed = bcrypt.hashSync(password, config.bcrypt.saltRounds)
-    const users = await authRepository.createUser({//{} 로 감싸야지 한번에 보낼수 있음
+    const users = await authRepository.createUser({
         username, 
-        password:hashed, 
+        password: hashed, 
         name, 
-        email,
-        url
-    }) 
+        email, 
+        url})
     const token = await createJwtToken(users.id)
     // console.log(token)
     res.status(201).json({token, username})
