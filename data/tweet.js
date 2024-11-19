@@ -77,7 +77,7 @@
 //         tweet.destroy()
 //     })
 // }
-
+ // 바뀜
 
 
 import MongoDb, { ReturnDocument } from 'mongodb'

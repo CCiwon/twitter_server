@@ -6,8 +6,8 @@ export async function connectDB() {
     .then((client)=>{
         db=client.db()
     })
-    
-}
+     
+}   
 
 export function getUsers(){
     return db.collection('users')
@@ -15,4 +15,4 @@ export function getUsers(){
 
 export function getTweets(){
     return db.collection('tweets')
-}
+}  //바뀜
